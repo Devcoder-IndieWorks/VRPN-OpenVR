@@ -5,8 +5,10 @@
 #include <memory>
 #include <openvr.h>
 #include <quat.h>
+#include <vrpn_BaseClass.h>
 #include <vrpn_Connection.h>
 #include <vrpn_ForwarderController.h>
+#include <vrpn_Generic_server_object.h>
 #include "vrpn_Tracker_OpenVR_HMD.h"
 #include "vrpn_Tracker_OpenVR_Controller.h"
 
@@ -36,7 +38,7 @@ static const auto TRIGGER_ANALOG_OFFSET = 2;
 
 class vrpn_Server_OpenVR {
 public:
-	vrpn_Server_OpenVR();
+	vrpn_Server_OpenVR( bool InGenericServer = false, const char* InGenericServerConfigFile = NULL, bool InVerbose = false, bool InBailOnError = true );
 	~vrpn_Server_OpenVR();
 	void mainloop();
 
@@ -44,7 +46,7 @@ private:
 	std::unique_ptr<vr::IVRSystem> vr{ nullptr };
 	vrpn_Connection *connection;
     vrpn_Forwarder_Server* forwarderServer;
-    //vrpn_Generic_Server_Object* genericSever;
+    vrpn_Generic_Server_Object* genericSever;
 	std::map<vr::TrackedDeviceIndex_t, std::unique_ptr<vrpn_Tracker_OpenVR_HMD>> hmds{};
 	std::map<vr::TrackedDeviceIndex_t, std::unique_ptr<vrpn_Tracker_OpenVR_Controller>> controllers{};
 };

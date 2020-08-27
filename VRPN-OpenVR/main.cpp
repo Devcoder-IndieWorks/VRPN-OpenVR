@@ -42,11 +42,39 @@ int main(int argc, char *argv[]) {
     SetConsoleCtrlHandler( handleConsoleSignalsWin, TRUE );
 #endif
 
-    server = std::make_unique<vrpn_Server_OpenVR>();
+    const char* configFilename = "vrpn.cfg";
+    bool makeGenericServer = true;
+    bool verbose = false;
+    bool bailOnError = true;
+
+    int i = 1;
+    while( i < argc ) {
+        if ( !strcmp( argv[ i ], "-f" ) ) {
+            if ( ++i <= argc )
+                configFilename = argv[ i ];
+        }
+        else if ( !strcmp( argv[ i ], "-g" ) ) {
+            makeGenericServer = true;
+        }
+        else if ( !strcmp( argv[ i ], "-v" ) ) {
+            verbose = true;
+            vrpn_System_TextPrinter.set_min_level_to_print( vrpn_TEXT_NORMAL );
+        }
+        else if ( !strcmp( argv[ i ], "-warn" ) ) {
+            bailOnError = false;
+        }
+
+        ++i;
+    }
+
+    server = std::make_unique<vrpn_Server_OpenVR>( makeGenericServer, configFilename, 
+        verbose, bailOnError );
+
     while (!done) {
         server->mainloop();
         vrpn_SleepMsecs(16);
     }
+
     server.reset(nullptr);
     return 0;
 }

@@ -201,6 +201,10 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gpsnmealib\latLonCoord.C" />
+    <ClCompile Include="gpsnmealib\nmeaParser.C" />
+    <ClCompile Include="gpsnmealib\typedCoord.C" />
+    <ClCompile Include="gpsnmealib\utmCoord.C" />
     <ClCompile Include="server_src\vrpn_Generic_server_object.C" />
     <ClCompile Include="vrpn_3DConnexion.C">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
@@ -966,6 +970,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gpsnmealib\latLonCoord.h" />
+    <ClInclude Include="gpsnmealib\nmeaParser.h" />
+    <ClInclude Include="gpsnmealib\typedCoord.h" />
+    <ClInclude Include="gpsnmealib\utmCoord.h" />
     <ClInclude Include="server_src\vrpn_Generic_server_object.h" />
     <ClInclude Include="vrpn_3DConnexion.h" />
     <ClInclude Include="vrpn_3DMicroscribe.h" />
