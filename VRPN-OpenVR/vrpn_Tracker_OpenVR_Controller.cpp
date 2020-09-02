@@ -22,10 +22,12 @@ void vrpn_Tracker_OpenVR_Controller::mainloop() {
     vrpn_gettimeofday( &(vrpn_Tracker_OpenVR::timestamp), NULL );
 	vrpn_Tracker_OpenVR::mainloop();
 
+    vrpn_Analog::server_mainloop();
 	vrpn_gettimeofday( &(vrpn_Analog::timestamp), NULL );
 	vrpn_Analog::report_changes();
 
 
+    vrpn_Button_Filter::server_mainloop();
     vrpn_gettimeofday( &(vrpn_Button_Filter::timestamp), NULL );
 	vrpn_Button_Filter::report_changes();
 }
